@@ -336,6 +336,7 @@ var ingredientItemizer = function(string) {
 
 // Returns a string with random pizza ingredients nested inside <li> tags
 var makeRandomPizza = function() {
+
 	var pizza = "";
 
 	var numberOfMeats = Math.floor((Math.random() * 4));
@@ -343,25 +344,26 @@ var makeRandomPizza = function() {
 	var numberOfCheeses = Math.floor((Math.random() * 2));
 
 	for (var i = 0; i < numberOfMeats; i++) {
-		pizza = pizza + ingredientItemizer(selectRandomMeat());
+		pizza += ingredientItemizer(selectRandomMeat());
 	}
 
 	for (var j = 0; j < numberOfNonMeats; j++) {
-		pizza = pizza + ingredientItemizer(selectRandomNonMeat());
+		pizza += ingredientItemizer(selectRandomNonMeat());
 	}
 
 	for (var k = 0; k < numberOfCheeses; k++) {
-		pizza = pizza + ingredientItemizer(selectRandomCheese());
+		pizza += ingredientItemizer(selectRandomCheese());
 	}
 
-	pizza = pizza + ingredientItemizer(selectRandomSauce());
-	pizza = pizza + ingredientItemizer(selectRandomCrust());
+	pizza += ingredientItemizer(selectRandomSauce());
+	pizza += ingredientItemizer(selectRandomCrust());
 
 	return pizza;
 };
 
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
+
 	var pizzaContainer,             // contains pizza title, image and list of ingredients
 		pizzaImageContainer,        // contains the pizza image
 		pizzaImage,                 // the pizza image itself
@@ -399,6 +401,8 @@ var pizzaElementGenerator = function(i) {
 
 	return pizzaContainer;
 };
+
+
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
@@ -536,30 +540,35 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 var itemsToMove;
 
+var lastScrollPosition;
+var scrollPosition= 0;
+
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
+
+	requestAnimationFrame(updatePositions);
+
+	// If the scroll value has not been updated, dont do shit
+	if(lastScrollPosition === scrollPosition)
+		return;
+
+	// Set the last scroll to current scroll
+	lastScrollPosition= scrollPosition;
+
 	frame++;
 	window.performance.mark("mark_start_frame");
 
-	var scaledScroll= document.body.scrollTop / 1250;
-
-	var phase;
-
-	// No reason for the task to happen synchronously
-	// requestAnimationFrame(function() {
 	Array
 		.from(itemsToMove || [])
 		.forEach(function(item, i) {
 
-			phase = Math.sin(scaledScroll + (i % 5));
+			var phase = Math.sin(scrollPosition/1250 + (i % 5));
 
 			// item.style.left= (item.basicLeft + 100 * phase) + 'px';
-			// 
+
 			// Lettin the gpu handle its stuff, ya know
 			item.style.transform= 'translateX(' + (item.basicLeft + 100 * phase) + 'px)';
 		});
-	// });
-
 
 	// User Timing API to the rescue again. Seriously, it's worth learning.
 	// Super easy to create custom metrics.
@@ -571,15 +580,23 @@ function updatePositions() {
 	}
 }
 
+function onScrollEventHandler() {
+
+	// document.body.scrollTop is deprecated(firefox)
+	scrollPosition= document.documentElement.scrollTop || document.body.scrollTop;
+}
 
 
 
-// runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+
+window.addEventListener('scroll', onScrollEventHandler);
+
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
 	var s = 256;
+
+	scrollPosition= document.documentElement.scrollTop || document.body.scrollTop;
 
 	// Wrap all the pizzas in a new element and then append it to the dom
 	var wrapper= document.createElement('div');
@@ -601,6 +618,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		elem.style.width = "73.333px";
 		elem.basicLeft = (i % cols) * s;
 		elem.style.top = (Math.floor(i / cols) * s) + 'px';
+		elem.style.left = '0px';
 
 		wrapper.appendChild(elem);
 	}
@@ -609,5 +627,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	itemsToMove = wrapper.children;
 
-	updatePositions();
+	// Start the frame iteration
+	requestAnimationFrame(updatePositions);
 });
