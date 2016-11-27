@@ -504,10 +504,18 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
+  var scrollTop= document.body.scrollTop;
+
+  Array
+    .from(items)
+    .forEach(function(item, i) {
+
+      var phase = Math.sin((scrollTop / 1250) + (i % 5));
+
+      requestAnimationFrame(function() {
+        item.style.left= item.basicLeft + 100 * phase + 'px';
+      });
+    });
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
