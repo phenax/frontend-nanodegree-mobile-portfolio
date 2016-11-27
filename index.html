@@ -48,8 +48,8 @@
 					</li>
 
 					<li>
-						<img style="width: 100px;" src="views/images/pizzeria.jpg">
-						<a href="views/pizza.html">Cam's Pizzeria</a>
+						<img style="width: 100px;" src="dist/img/pizzeria.jpg">
+						<a href="pizza.html">Cam's Pizzeria</a>
 						<p>Who wants a performant pizza?</p>
 					</li>
 				</ul>
@@ -61,25 +61,28 @@
 		</div>
 
 
+
 		<!-- Load asynchronously and defer execution -->
 		<script async defer src="http://www.google-analytics.com/analytics.js"></script>
-		<script async defer src="js/perfmatters.js"></script>
+		<script async defer src="dist/js/perfmatters.js"></script>
+
+
+		<!-- Defer style loading for google web fonts -->
+		<noscript id='deferStyles'>
+			<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+		</noscript>
 
 		<!-- Moved to the footer -->
 		<script>
+
 			(function(w,g){w['GoogleAnalyticsObject']=g;
 			w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
 
 			// Optional TODO: replace with your Google Analytics profile ID.
 			ga('create', 'UA-XXXX-Y');
 			ga('send', 'pageview');
-		</script>
 
-		<!-- Defer style loading for google web fonts -->
-		<noscript id='deferStyles'>
-			<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
-		</noscript>
-		<script>
+
 			requestAnimationFrame(() => {
 				setTimeout(() => {
 

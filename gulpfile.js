@@ -86,7 +86,9 @@ function minfyCSS() {
 
 
 
-
+/**
+ * JS file minification
+ */
 function minifyJS() {
 
 	return gulp
