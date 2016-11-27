@@ -56,4 +56,5 @@ form {
   position: absolute;
   width: 256px;
   left: 0 !important;
+  /*will-change: transform;*/
 }
