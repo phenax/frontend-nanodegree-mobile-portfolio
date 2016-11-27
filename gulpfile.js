@@ -35,7 +35,7 @@ const imageList= [
 	},
 	{
 		name: 'pizza.png',
-		size: 700,
+		size: 200,
 		noOptim: true
 	}
 ];
@@ -60,7 +60,7 @@ function minifyImages() {
 			}
 
 			source.pipe(
-				gulp.dest(path.join(__dirname, './dist/img/')
+				gulp.dest(path.join(__dirname, './dist/img/'))
 			);
 		}
 	);
@@ -73,15 +73,24 @@ function minifyImages() {
  */
 function minfyCSS() {
 
-	const minifyCSSSource= (src, dest) => {
-
-		return gulp.src(path.join(__dirname, src, '*.css'))
-			.pipe(minify({ compatibility: 'ie8' }))
-			.pipe(gulp.dest(path.join(__dirname, dest));
-	};
+	const minifyCSSSource= 
+		(src, dest) => 
+			gulp.src(path.join(__dirname, src, '*.css'))
+				.pipe(minify({ compatibility: 'ie8' }))
+				.pipe(gulp.dest(path.join(__dirname, dest)));
 
 	return minifyCSSSource('./src/css/', './dist/css/');
 }
+
+
+
+
+function minifyJS() {
+
+}
+
+
+
 
 
 gulp.task('minify:css', minfyCSS);
