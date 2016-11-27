@@ -2,6 +2,7 @@ const gulp= require('gulp');
 const minify= require('gulp-clean-css');
 const imageOptim= require('gulp-image-optimization');
 const imageResize= require('gulp-image-resize');
+const path= require('path');
 
 
 // Options to pass to gulp-image-optimization
@@ -13,50 +14,31 @@ const optimizationOptions= {
 // All the images to optimize
 const imageList= [
 	{
-		src: './img/2048.jpg',
-		dest: './dist/img',
+		name: '2048.jpg',
 		size: 400
 	},
 	{
-		src: './img/cam_be_like.jpg',
-		dest: './dist/img',
+		name: 'cam_be_like.jpg',
 		size: 300
 	},
 	{
-		src: './img/mobilewebdev.jpg',
-		dest: './dist/img',
+		name: 'mobilewebdev.jpg',
 		size: 400
 	},
 	{
-		src: './img/profilepic.jpg',
-		dest: './dist/img',
+		name: 'profilepic.jpg',
 		size: 70
 	},
 	{
-		src: './views/images/pizzeria.jpg',
-		dest: './views/dist/img',
+		name: 'pizzeria.jpg',
 		size: 700
 	},
 	{
-		src: './views/images/pizza.png',
-		dest: './views/dist/img',
+		name: 'pizza.png',
 		size: 700,
 		noOptim: true
 	}
 ];
-
-function minfyCSS() {
-
-	const minifyCSSSource= (src) => {
-
-		gulp.src(`${src}css/*.css`)
-			.pipe(minify({ compatibility: 'ie8' }))
-			.pipe(gulp.dest(`${src}dist/css`));
-	};
-
-	minifyCSSSource('./');
-	minifyCSSSource('./views/');
-}
 
 /**
  * Optimizes all the images
@@ -68,7 +50,7 @@ function minifyImages() {
 		image => {
 
 			let source= 
-				gulp.src(image.src)
+				gulp.src(path.join(__dirname, './src/img/', image.name))
 					.pipe(imageResize({ width: image.size }));
 
 			if(!image.noOptim) {
@@ -77,10 +59,30 @@ function minifyImages() {
 						.pipe(imageOptim(optimizationOptions))
 			}
 
-			source.pipe(gulp.dest(image.dest))
+			source.pipe(
+				gulp.dest(path.join(__dirname, './dist/img/')
+			);
 		}
 	);
 }
+
+
+
+/**
+ * Minify CSS files
+ */
+function minfyCSS() {
+
+	const minifyCSSSource= (src, dest) => {
+
+		return gulp.src(path.join(__dirname, src, '*.css'))
+			.pipe(minify({ compatibility: 'ie8' }))
+			.pipe(gulp.dest(path.join(__dirname, dest));
+	};
+
+	return minifyCSSSource('./src/css/', './dist/css/');
+}
+
 
 gulp.task('minify:css', minfyCSS);
 gulp.task('minify:img', minifyImages);
