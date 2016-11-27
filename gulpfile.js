@@ -33,11 +33,11 @@ const imageList= [
 	},
 	{
 		name: 'pizzeria.jpg',
-		size: 700
+		size: 500
 	},
 	{
 		name: 'pizza.png',
-		size: 200,
+		size: 150,
 		noOptim: true
 	}
 ];

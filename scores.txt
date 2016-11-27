@@ -1,0 +1,50 @@
+FEND Project PSI scores
+
+
+
+--------------------------------------------------------
+
+URL:       7051052d.ngrok.io
+Strategy:  mobile
+Speed:     86
+Usability: 100
+
+CSS size                                   | 601 B
+HTML size                                  | 5.82 kB
+Image size                                 | 96.08 kB
+JavaScript size                            | 28.72 kB
+CSS resources                              | 1
+Hosts                                      | 5
+JS resources                               | 2
+Resources                                  | 9
+Static resources                           | 4
+Total size of request bytes sent           | 730 B
+
+Enable GZIP compression                    | 0.3
+Leverage browser caching                   | 0.63
+Main resource server response time         | 6.23
+Minify HTML                                | 0.1
+Optimize images                            | 7.7
+
+--------------------------------------------------------
+
+
+
+
+--------------------------------------------------------
+
+URL:       7051052d.ngrok.io/project-2048
+Strategy:  mobile
+Speed:     100
+Usability: 67
+
+Hosts                                      | 1
+Resources                                  | 1
+Other size                                 | 161 B
+Total size of request bytes sent           | 51 B
+
+Configure viewport                         | 10
+Use legible font sizes                     | 40
+
+--------------------------------------------------------
+
