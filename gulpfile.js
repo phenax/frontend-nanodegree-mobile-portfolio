@@ -4,7 +4,7 @@ const gulp= require('gulp');
 const minify= require('gulp-clean-css');
 const imageOptim= require('gulp-image-optimization');
 const imageResize= require('gulp-image-resize');
-const uglify = require('gulp-uglifyjs');
+const uglify = require('gulp-uglify');
 
 
 // Options to pass to gulp-image-optimization

@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+# Usage:
+#  ./get-psi-score.sh https://example.com
 
 function addSeperator() {
 
