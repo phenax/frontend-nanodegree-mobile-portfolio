@@ -2,8 +2,6 @@ const gulp= require('gulp');
 const minify= require('gulp-clean-css');
 const imageOptim= require('gulp-image-optimization');
 const imageResize= require('gulp-image-resize');
-const rename= require('gulp-rename');
-const url= require('url');
 
 
 // Options to pass to gulp-image-optimization
@@ -15,37 +13,49 @@ const optimizationOptions= {
 // All the images to optimize
 const imageList= [
 	{
-		name: '2048.png',
-		location: 'img',
+		src: './img/2048.jpg',
+		dest: './dist/img',
+		size: 400
+	},
+	{
+		src: './img/cam_be_like.jpg',
 		dest: './dist/img',
 		size: 300
 	},
 	{
-		name: 'cam_be_like.jpg',
-		location: 'img',
+		src: './img/mobilewebdev.jpg',
 		dest: './dist/img',
-		size: 300
+		size: 400
 	},
 	{
-		name: 'mobilewebdev.jpg',
-		location: 'img',
+		src: './img/profilepic.jpg',
 		dest: './dist/img',
-		size: 300
+		size: 70
 	},
 	{
-		name: 'profilepic.jpg',
-		location: 'img',
-		dest: './dist/img',
-		size: 300
+		src: './views/images/pizzeria.jpg',
+		dest: './views/dist/img',
+		size: 700
+	},
+	{
+		src: './views/images/pizza.png',
+		dest: './views/dist/img',
+		size: 700,
+		noOptim: true
 	}
 ];
 
 function minfyCSS() {
 
-	return gulp
-		.src(`./css/*.css`)
-		.pipe(minify({ compatibility: 'ie8' }))
-		.pipe(gulp.dest('./dist/css'));
+	const minifyCSSSource= (src) => {
+
+		gulp.src(`${src}css/*.css`)
+			.pipe(minify({ compatibility: 'ie8' }))
+			.pipe(gulp.dest(`${src}dist/css`));
+	};
+
+	minifyCSSSource('./');
+	minifyCSSSource('./views/');
 }
 
 /**
@@ -54,11 +64,21 @@ function minfyCSS() {
 function minifyImages() {
 
 	imageList.forEach(
-		image => 
-			gulp.src(`./${image.location}/${image.name}`)
-				.pipe(imageResize({ width: image.size }))
-				// .pipe(imageOptim(optimizationOptions))
-				.pipe(gulp.dest(image.dest))
+
+		image => {
+
+			let source= 
+				gulp.src(image.src)
+					.pipe(imageResize({ width: image.size }));
+
+			if(!image.noOptim) {
+				source= 
+					source
+						.pipe(imageOptim(optimizationOptions))
+			}
+
+			source.pipe(gulp.dest(image.dest))
+		}
 	);
 }
 
