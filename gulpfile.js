@@ -1,8 +1,10 @@
+const path= require('path');
+
 const gulp= require('gulp');
 const minify= require('gulp-clean-css');
 const imageOptim= require('gulp-image-optimization');
 const imageResize= require('gulp-image-resize');
-const path= require('path');
+const uglify = require('gulp-uglifyjs');
 
 
 // Options to pass to gulp-image-optimization
@@ -87,11 +89,16 @@ function minfyCSS() {
 
 function minifyJS() {
 
+	return gulp
+		.src('./src/js/*.js')
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist/js/'));
 }
 
 
 
 
 
+gulp.task('minify:js', minifyJS);
 gulp.task('minify:css', minfyCSS);
 gulp.task('minify:img', minifyImages);
