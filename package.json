@@ -1,0 +1,27 @@
+{
+  "name": "perf-fend",
+  "version": "0.0.0",
+  "description": "Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phenax/portfolio-pref-fend.git"
+  },
+  "keywords": [
+    "performance"
+  ],
+  "author": "Akshay Nair <phenax5@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/phenax/portfolio-pref-fend/issues"
+  },
+  "homepage": "https://github.com/phenax/portfolio-pref-fend#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.13",
+    "psi": "^2.0.4"
+  }
+}
