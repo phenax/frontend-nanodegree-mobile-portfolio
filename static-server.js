@@ -8,6 +8,8 @@ const { createGzip, createDeflate }= require('zlib');
 const { lstatSync, createReadStream }= require('fs');
 
 
+const STATIC_DIR= 'static';
+
 
 // If its that master instance
 if(cluster.isMaster) {
@@ -103,7 +105,7 @@ function serverRequestHandler(req, res) {
 	console.log("Fetching " + req.url);
 
 	const uri= url.parse(req.url).pathname;
-	let filePath = path.join(process.cwd(), unescape(uri));
+	let filePath = path.join(process.cwd(), STATIC_DIR, unescape(uri));
 
 	// Get file stats
 	const fileStat= resolvePath(filePath);

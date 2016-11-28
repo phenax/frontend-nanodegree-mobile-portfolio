@@ -52,7 +52,7 @@ function minifyImages() {
 		image => {
 
 			let source= 
-				gulp.src(path.join(__dirname, './src/img/', image.name))
+				gulp.src(path.join(__dirname, './static/src/img/', image.name))
 					.pipe(imageResize({ width: image.size }));
 
 			if(!image.noOptim) {
@@ -62,7 +62,7 @@ function minifyImages() {
 			}
 
 			source.pipe(
-				gulp.dest(path.join(__dirname, './dist/img/'))
+				gulp.dest(path.join(__dirname, './static/dist/img/'))
 			);
 		}
 	);
@@ -81,7 +81,7 @@ function minfyCSS() {
 				.pipe(minify({ compatibility: 'ie8' }))
 				.pipe(gulp.dest(path.join(__dirname, dest)));
 
-	return minifyCSSSource('./src/css/', './dist/css/');
+	return minifyCSSSource('./static/src/css/', './static/dist/css/');
 }
 
 
@@ -92,9 +92,9 @@ function minfyCSS() {
 function minifyJS() {
 
 	return gulp
-		.src('./src/js/*.js')
+		.src('./static/src/js/*.js')
 		.pipe(uglify())
-		.pipe(gulp.dest('./dist/js/'));
+		.pipe(gulp.dest('./static/dist/js/'));
 }
 
 
