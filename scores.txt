@@ -4,27 +4,24 @@ FEND Project PSI scores
 
 --------------------------------------------------------
 
-URL:       7051052d.ngrok.io
+URL:       53a48f75.ngrok.io
 Strategy:  mobile
-Speed:     86
+Speed:     92
 Usability: 100
 
-CSS size                                   | 601 B
-HTML size                                  | 5.82 kB
-Image size                                 | 96.08 kB
-JavaScript size                            | 28.72 kB
+CSS size                                   | 529 B
+HTML size                                  | 4.56 kB
+Image size                                 | 61.89 kB
+JavaScript size                            | 28.67 kB
 CSS resources                              | 1
 Hosts                                      | 5
 JS resources                               | 2
 Resources                                  | 9
-Static resources                           | 4
+Static resources                           | 8
 Total size of request bytes sent           | 730 B
 
-Enable GZIP compression                    | 0.3
-Leverage browser caching                   | 0.63
-Main resource server response time         | 6.23
-Minify HTML                                | 0.1
-Optimize images                            | 7.7
+Leverage browser caching                   | 1.49
+Main resource server response time         | 5.1
 
 --------------------------------------------------------
 
@@ -33,18 +30,100 @@ Optimize images                            | 7.7
 
 --------------------------------------------------------
 
-URL:       7051052d.ngrok.io/project-2048
+URL:       53a48f75.ngrok.io/project-2048.html
 Strategy:  mobile
-Speed:     100
-Usability: 67
+Speed:     96
+Usability: 100
 
+CSS size                                   | 529 B
+HTML size                                  | 3.75 kB
+Image size                                 | 53.53 kB
+JavaScript size                            | 28.67 kB
+CSS resources                              | 1
+Hosts                                      | 2
+JS resources                               | 2
+Resources                                  | 7
+Static resources                           | 5
+Total size of request bytes sent           | 692 B
+
+Leverage browser caching                   | 1.49
+Main resource server response time         | 1.34
+
+--------------------------------------------------------
+
+
+
+
+--------------------------------------------------------
+
+URL:       53a48f75.ngrok.io/project-mobile.html
+Strategy:  mobile
+Speed:     96
+Usability: 100
+
+CSS size                                   | 529 B
+HTML size                                  | 3.69 kB
+Image size                                 | 14.8 kB
+JavaScript size                            | 28.67 kB
+CSS resources                              | 1
+Hosts                                      | 2
+JS resources                               | 2
+Resources                                  | 7
+Static resources                           | 5
+Total size of request bytes sent           | 702 B
+
+Leverage browser caching                   | 1.49
+Main resource server response time         | 1.8
+
+--------------------------------------------------------
+
+
+
+
+--------------------------------------------------------
+
+URL:       53a48f75.ngrok.io/project-webperf.html
+Strategy:  mobile
+Speed:     96
+Usability: 100
+
+CSS size                                   | 529 B
+HTML size                                  | 3.88 kB
+Image size                                 | 22.73 kB
+JavaScript size                            | 28.67 kB
+CSS resources                              | 1
+Hosts                                      | 2
+JS resources                               | 2
+Resources                                  | 7
+Static resources                           | 5
+Total size of request bytes sent           | 706 B
+
+Leverage browser caching                   | 1.49
+Main resource server response time         | 1.28
+
+--------------------------------------------------------
+
+
+
+
+--------------------------------------------------------
+
+URL:       53a48f75.ngrok.io/pizza.html
+Strategy:  mobile
+Speed:     91
+Usability: 100
+
+HTML size                                  | 14.93 kB
+Image size                                 | 79.42 kB
+JavaScript size                            | 16.42 kB
 Hosts                                      | 1
-Resources                                  | 1
-Other size                                 | 161 B
-Total size of request bytes sent           | 51 B
+JS resources                               | 1
+Resources                                  | 4
+Static resources                           | 3
+Total size of request bytes sent           | 229 B
 
-Configure viewport                         | 10
-Use legible font sizes                     | 40
+Leverage browser caching                   | 0.65
+Prioritize visible content                 | 8
 
 --------------------------------------------------------
 
