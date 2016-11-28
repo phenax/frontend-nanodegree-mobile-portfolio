@@ -1,19 +1,18 @@
 
-const http= require('http');
-const cluster= require('cluster');
-const os= require('os');
-const path= require('path');
-const zlib= require('zlib');
-const fs= require('fs');
 const url= require('url');
+const http= require('http');
+const path= require('path');
 const mimeTypes= require('mime');
+const cluster= require('cluster');
+const { createGzip, createDeflate }= require('zlib');
+const { lstatSync, createReadStream }= require('fs');
 
 
 
 // If its that master instance
 if(cluster.isMaster) {
 
-	const noOfCpus= os.cpus().length;
+	const noOfCpus= require('os').cpus().length;
 
 	// Create a new server for each cpu available
 	for(let i= 0; i< noOfCpus; i++)
@@ -52,7 +51,7 @@ function resolvePath(filePath) {
 	let fileStat;
 
 	try {
-		fileStat = fs.lstatSync(filePath);
+		fileStat = lstatSync(filePath);
 	} catch (e) {
 		return false;
 	}
@@ -86,8 +85,8 @@ function gzipStream(file$, req) {
 
 	const compression$= 
 		(encType[0] === 'deflate')? 
-			zlib.createDeflate(): 
-			zlib.createGzip();
+			createDeflate(): 
+			createGzip();
 
 	return {
 		stream$: file$.pipe(compression$),
@@ -131,7 +130,7 @@ function serverRequestHandler(req, res) {
 		const mime= mimeTypes.lookup(filePath);
 
 		// Create a readable stream from the file
-		const file$= fs.createReadStream(filePath);
+		const file$= createReadStream(filePath);
 
 		if(file$) {
 
@@ -142,7 +141,10 @@ function serverRequestHandler(req, res) {
 			if(compressed.encoding)
 				res.setHeader('Content-Encoding', compressed.encoding);
 
-			res.writeHead(200, { 'Content-Type': mime });
+			res.writeHead(200, {
+				'Content-Type': mime,
+				'Cache-Control': 'public, max-age=' + (5*24*60*60)         // Caching for 5 days
+			});
 
 			// Pipe it out to the response
 			compressed.stream$.pipe(res);
