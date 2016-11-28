@@ -4,6 +4,7 @@
   "description": "Performance optimization project - fend",
   "main": "index.html",
   "scripts": {
+    "start": "node ./static-server.js",
     "css": "gulp minify:css",
     "img": "gulp minify:img",
     "js": "gulp minify:js",

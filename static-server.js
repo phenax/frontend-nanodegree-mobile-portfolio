@@ -1,10 +1,35 @@
 
 const http= require('http');
+const cluster= require('cluster');
+const os= require('os');
 const path= require('path');
 const zlib= require('zlib');
 const fs= require('fs');
 const url= require('url');
 const mimeTypes= require('mime');
+
+
+
+// If its that master instance
+if(cluster.isMaster) {
+
+	const noOfCpus= os.cpus().length;
+
+	// Create a new server for each cpu available
+	for(let i= 0; i< noOfCpus; i++)
+		cluster.fork();
+
+	// If a cluster fails, create a new cluster in its place
+	cluster.on('exit', () => cluster.fork());
+} else {
+
+	http
+		.createServer(serverRequestHandler)
+		.listen(8080, ()=> {
+			console.log("Server started");
+		});
+}
+
 
 
 /**
@@ -115,7 +140,7 @@ function serverRequestHandler(req, res) {
 
 			// If the stream was encoded, set the header
 			if(compressed.encoding)
-				res.setHeader('Content-Encoding': compressed.encoding);
+				res.setHeader('Content-Encoding', compressed.encoding);
 
 			res.writeHead(200, { 'Content-Type': mime });
 
@@ -129,7 +154,3 @@ function serverRequestHandler(req, res) {
 	}
 }
 
-
-http.createServer(serverRequestHandler).listen(8080, ()=> {
-	console.log("Server started");
-});
