@@ -55,6 +55,7 @@ function minifyImages() {
 				gulp.src(path.join(__dirname, './static/src/img/', image.name))
 					.pipe(imageResize({ width: image.size }));
 
+			// If an image shouldnt be optimized, dont do it
 			if(!image.noOptim) {
 				source= 
 					source
