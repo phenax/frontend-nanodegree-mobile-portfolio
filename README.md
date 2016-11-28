@@ -27,4 +27,4 @@
  * Changed the number of pizzas to depend on the size of the screen.(Makes it faster for mobile devices).
  * Changed the movement of pizzas so that instead of changing the 'left' property, it translates the element(It still paints tho).
  * Changed a few stuff to prevent forced synchronous layout from being triggered.
- * Cached DOM elements.
+ * Cached DOM elements
